@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pickupgen</title>
+</head>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap');
+
+    *{
+        margin: 0;padding: 0;
+        font-family: "Source Code Pro", serif;
+        font-optical-sizing: auto;
+    }
+    body{
+        height: 100vh;
+        width: 100vw;
+    }
+    main{
+        height: 100%;
+        display: flex;justify-content: center;align-items: center;flex-direction: column;
+        gap: 64px;
+        width: 100%;
+        background-color: rgba(211, 10, 110, 0.877);
+    }
+
+    h1{
+        color: white;
+        font-weight: 800;
+        font-size: 6vmax;
+        box-shadow: 0px 0px 5px 2px rgb(236, 132, 150);
+        padding: 4px 8px;
+        border-radius: 8px;
+    }
+
+    h2{
+        color: white;
+        font-weight: 200;
+        font-size: 3vmax;
+        border-bottom: 1px solid white;
+        border-top: 1px solid white;
+        padding: 8px 16px;
+    }
+
+    #btn{
+        background-color: rgb(15, 15, 15);
+        color: white;
+        padding: 16px 64px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 3vmax;
+    }
+    #btn:hover{
+        background-color: rgb(0, 0, 0);
+        color: rgb(255, 255, 255);
+        box-shadow: 0px 0px 12px 2px rgb(224, 17, 86) ;
+
+    }
+    .joke{
+        width: 80%;
+        text-align: center;
+    }
+
+</style>
+<body>
+    
+<main>
+    <h1>-PickupGen-</h1>
+    <div class="joke">
+        <h2 id="jok"></h2>
+    </div>
+    <span id="btn">Generate</span>
+</main>
+
+
+<script>
+    const btn = document.querySelector("#btn");
+    
+    let lines = [
+    "Are you French? Because Eiffel for you.",
+    "Do you have a map? I keep getting lost in your eyes.",
+    "Is your name Google? Because you have everything I’ve been searching for.",
+    "Are you a magician? Because whenever I look at you, everyone else disappears.",
+    "Can I follow you home? Cause my parents always told me to follow my dreams.",
+    "Do you have a Band-Aid? Because I just scraped my knee falling for you.",
+    "Are you a time traveler? Because I see you in my future.",
+    "Is your name Wi-Fi? Because I’m feeling a connection.",
+    "Do you have a pencil? Because I want to erase your past and write our future.",
+    "Are you a parking ticket? Because you’ve got 'FINE' written all over you.",
+    "Is your dad a boxer? Because you’re a knockout!",
+    "Do you believe in love at first sight, or should I walk by again?",
+    "Is your name Starbucks? Because I like you a latte.",
+    "Are you a camera? Every time I look at you, I smile.",
+    "Are you a snowstorm? Because you’re making my heart race.",
+    "If you were a vegetable, you’d be a cute-cumber.",
+    "Are you an angel? Because heaven is missing one.",
+    "Can I take you out for dinner? Because I can’t seem to get you out of my mind.",
+    "Is there an airport nearby, or is that just my heart taking off?",
+    "If you were a fruit, you’d be a fineapple.",
+    "Do you like Star Wars? Because Yoda one for me.",
+    "Is it hot in here, or is it just you?",
+    "Can you lend me a kiss? I promise I’ll give it back.",
+    "Are you a beaver? Because daaaaam.",
+    "Can I borrow your phone? Because I want to call my mom and tell her I met 'the one.'",
+    "If beauty were a crime, you’d be serving a life sentence.",
+    "Are you the ocean? Because I’m lost at sea.",
+    "You must be tired because you’ve been running through my mind all day.",
+    "Are you a bank loan? Because you have my interest.",
+    "If I were to ask you out, would your answer be the same as the answer to this question?",
+    "If I had a star for every time you brightened my day, I’d have a galaxy in my hand.",
+    "Do you have a sun? Because you light up my world.",
+    "You must be made of copper and tellurium, because you’re Cu-Te.",
+    "Is your name Chapstick? Because you’re da balm.",
+    "Do you have a quarter? Because I want to call my mom and tell her I met someone special.",
+    "Are you a light bulb? Because you brighten up my day.",
+    "If kisses were snowflakes, I’d send you a blizzard.",
+    "Do you have any raisins? No? How about a date?",
+    "Are you a campfire? Because you’re hot and I want s’more.",
+    "If you were a triangle, you’d be acute one.",
+    "I must be a snowflake, because I’ve fallen for you.",
+    "Do you have a mirror in your pocket? Because I can see myself in your pants.",
+    "If you were a cat, you’d purr-fect.",
+    "I was blinded by your beauty... I’m going to need your name and number for insurance purposes.",
+    "Are you a dictionary? Because you add meaning to my life.",
+    "Are you a cupcake? Because you’re sweet and I want a bite.",
+    "Do you have a name, or can I call you mine?",
+    "Are you an angel? Because I think heaven is missing you.",
+    "You must be a parking ticket, because you’ve got FINE written all over you.",
+    "If you were a vegetable, you’d be a cute-cumber.",
+    "Are you a magician? Because whenever I look at you, everyone else disappears.",
+    "I’m not a photographer, but I can picture us together.",
+    "Can you take a picture? Because I want to show Santa what I want for Christmas.",
+    "Are you a dragon? Because you’re hot and I’m falling for you.",
+    "Do you have a pencil? Because I want to erase your past and write our future.",
+    "You must be tired because you’ve been running through my mind all day.",
+    "Is your name Ariel? Because we mermaid for each other.",
+    "Do you know what would look great on you? Me.",
+    "Do you like raisins? No? How about a date?",
+    "If I were a cat, I’d spend all 9 lives with you.",
+    "Are you a phone? Because you’re giving me a call.",
+    "Are you a magnet? Because I’m attracted to you.",
+    "Do you know if there are any Wi-Fi signals around here? Because I’m feeling a connection.",
+    "Is your name Google? Because you have everything I’ve been searching for.",
+    "Can you tell me the time? Because I just lost track when I saw you.",
+    "Are you a snowflake? Because you’re one of a kind.",
+    "Do you have a library card? Because I’m checking you out.",
+    "Is there an airport nearby, or is that just my heart taking off?",
+    "Are you French? Because Eiffel for you.",
+    "Can I take you out for dinner? Because I can’t seem to get you out of my mind.",
+    "Do you have any idea how beautiful you are?",
+    "Can I follow you home? Cause my parents always told me to follow my dreams.",
+    "Are you a light bulb? Because you brighten up my world.",
+    "Is your name Google? Because you have everything I’ve been searching for.",
+    "Are you a camera? Every time I look at you, I smile.",
+    "If I could rearrange the alphabet, I’d put U and I together.",
+    "Is your name Chapstick? Because you’re da balm.",
+    "Can you lend me a kiss? I promise I’ll give it back.",
+    "You must be tired because you’ve been running through my mind all day.",
+    "Are you a parking ticket? Because you’ve got 'FINE' written all over you.",
+    "I must be a snowflake because I’ve fallen for you.",
+    "Are you a beaver? Because daaaaam.",
+    "Are you made of copper and tellurium? Because you’re Cu-Te.",
+    "If I could rearrange the alphabet, I’d put U and I together.",
+    "Do you believe in love at first sight or should I walk by again?",
+    "Can you help me? I’m writing a term paper on the finer things in life, and I was wondering if I could interview you.",
+    "Are you an angel? Because heaven is missing one.",
+    "I must be a snowflake because I’ve fallen for you.",
+    "Are you a dragon? Because you’re hot and I’m falling for you.",
+    "Do you have a map? I keep getting lost in your eyes.",
+    "You must be tired because you’ve been running through my mind all day.",
+    "Are you a magician? Because every time I look at you, everyone else disappears.",
+    "Can I borrow a pencil? Because I want to draw you into my life.",
+    "You must be a parking ticket, because you’ve got 'fine' written all over you.",
+    "Are you a campfire? Because you’re hot and I want s’more.",
+    "Are you a beaver? Because daaaaam.",
+    "Is your dad a boxer? Because you’re a knockout!",
+    "You must be made of copper and tellurium, because you’re Cu-Te.",
+    "Do you have a mirror in your pocket? Because I can see myself in your pants.",
+    "Do you have any raisins? No? How about a date?",
+    "If you were a vegetable, you’d be a cute-cumber.",
+    "Are you the ocean? Because I’m lost at sea.",
+    "Can I take you out for dinner? Because I can’t seem to get you out of my mind.",
+    "Is your name Ariel? Because we mermaid for each other.",
+    "Do you have a library card? Because I’m checking you out.",
+    "Can I borrow your phone? I need to call heaven and tell them I found an angel.",
+    "Do you have a Band-Aid? Because I just scraped my knee falling for you.",
+    "Do you believe in love at first sight, or should I walk by again?",
+    "Can I follow you home? Cause my parents always told me to follow my dreams.",
+    "Is your name Wi-Fi? Because I’m feeling a connection.",
+    "Is there a sparkle in your eye, or are you just happy to see me?",
+    "Are you a beaver? Because daaaaam.",
+    "Are you French? Because Eiffel for you."
+];
+
+
+btn.addEventListener("click",function(){
+    let randomLine = lines[Math.floor(Math.random() * lines.length)];
+
+let jok = document.querySelector("#jok");
+jok.textContent = randomLine;
+})
+
+</script>
+</body>
+</html>

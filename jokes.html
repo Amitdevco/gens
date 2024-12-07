@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jokesgen</title>
+</head>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap');
+
+    *{
+        margin: 0;padding: 0;
+        font-family: "Source Code Pro", serif;
+        font-optical-sizing: auto;
+    }
+    body{
+        height: 100vh;
+        width: 100vw;
+    }
+    main{
+        height: 100%;
+        display: flex;justify-content: center;align-items: center;flex-direction: column;
+        gap: 64px;
+        width: 100%;
+        background-color: rgb(0, 0, 10);
+    }
+
+    h1{
+        color: white;
+        font-weight: 800;
+        font-size: 6vmax;
+        box-shadow: 0px 0px 12px 2px rgb(70, 70, 117) ;
+        padding: 4px 8px;
+        border-radius: 8px;
+    }
+
+    h2{
+        color: white;
+        font-weight: 200;
+        font-size: 3vmax;
+        border-bottom: 1px solid white;
+        border-top: 1px solid white;
+        padding: 8px 16px;
+    }
+
+    #btn{
+        background-color: rgb(15, 15, 15);
+        color: white;
+        padding: 16px 64px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 3vmax;
+    }
+    #btn:hover{
+        background-color: rgb(0, 0, 0);
+        color: rgb(255, 255, 255);
+        box-shadow: 0px 0px 12px 2px blue ;
+
+    }
+    .joke{
+        width: 80%;
+        text-align: center;
+    }
+
+</style>
+<body>
+    
+<main>
+    <h1>-JokesGen-</h1>
+    <div class="joke">
+        <h2 id="jok"></h2>
+    </div>
+    <span id="btn">Generate</span>
+</main>
+
+
+<script>
+    const btn = document.querySelector("#btn");
+    
+    let jokes = [
+    "I told my computer I needed a break, now it won’t stop sending me Kit-Kats.",
+    "Parallel lines have so much in common… it’s a shame they’ll never meet.",
+    "I’m reading a book on anti-gravity. It’s impossible to put down.",
+    "I used to play piano by ear, but now I just use my hands.",
+    "I asked the librarian if the library had any books on suicide. She said they were on the top shelf… I’m not sure how to take that.",
+    "I told my wife she was drawing her eyebrows too high. She looked surprised.",
+    "What’s the best way to watch a fly fishing tournament? Live stream.",
+    "I can't believe I got fired from the calendar factory. All I did was take a day off.",
+    "Why don't skeletons fight each other? They don't have the stomach for it.",
+    "I started a band called '1023MB'... We haven’t got a gig yet.",
+    "What do you get when you cross a snowman with a vampire? Frostbite.",
+    "Why don’t oysters share their pearls? Because they’re shellfish.",
+    "I used to be a baker, but I couldn’t make enough dough.",
+    "I told my wife she was drawing her eyebrows too high. She seemed surprised.",
+    "Why was the math book sad? It had too many problems.",
+    "I ate a clock yesterday, it was very time consuming.",
+    "Why don’t skeletons fight? They don’t have the guts.",
+    "What’s brown and sticky? A stick.",
+    "I broke my finger last week. On the other hand, I’m okay.",
+    "I can’t believe I got fired from the calendar factory. All I did was take a day off.",
+    "I have a joke about construction, but I’m still working on it.",
+    "I don’t trust stairs. They’re always up to something.",
+    "I’m on a whiskey diet. I’ve lost three days already.",
+    "Why don’t you ever see elephants hiding in trees? Because they’re really good at it.",
+    "I’d tell you a chemistry joke, but I know I wouldn’t get a reaction.",
+    "I’m reading a book on anti-gravity. It’s impossible to put down.",
+    "I told my wife she was drawing her eyebrows too high. She looked surprised.",
+    "I tried to catch some fog earlier. I mist.",
+    "I couldn’t figure out why I was late for work this morning, then I realized I was parked in a *no parking* zone.",
+    "I have a fear of speed bumps. But I’m slowly getting over it.",
+    "I used to be a baker, but I couldn't make enough dough.",
+    "I can’t believe I got fired from the calendar factory. All I did was take a day off.",
+    "I was going to tell you a joke about an elevator, but it’s an uplifting experience.",
+    "I just wrote a book on reverse psychology. Don’t buy it.",
+    "Why don’t seagulls fly over the bay? Because then they’d be bagels.",
+    "Why don't skeletons fight? They don’t have the guts.",
+    "I wanted to lose weight but I decided I’d stick with it.",
+    "What do you call fake spaghetti? An impasta.",
+    "I couldn't figure out why the baseball kept getting bigger. Then it hit me.",
+    "I made a pun about the wind, but it blows.",
+    "I have a fear of speed bumps, but I’m slowly getting over it.",
+    "Why don’t some couples go to the gym? Because some relationships don’t work out.",
+    "Why don’t seagulls fly over the bay? Because they’d be bagels.",
+    "I just burned 1,200 calories. I forgot the pizza in the oven.",
+    "I told my wife she should embrace her mistakes… She gave me a hug.",
+    "Why don’t some couples go to the gym? Because some relationships don’t work out.",
+    "What do you call a snowman with a six-pack? An abdominal snowman.",
+    "I wanted to tell a joke about a pencil, but it was pointless.",
+    "I only know 25 letters of the alphabet… I don’t know y.",
+    "I’m reading a book about anti-gravity. It’s impossible to put down.",
+    "I got a job as a human cannonball, but they fired me.",
+    "I think I’m allergic to school because every time I go there, I get a little bit *bored*.",
+    "What do you call a belt made of watches? A waist of time.",
+    "I once got into a fight with a broken pencil. It was pointless.",
+    "I told my wife she was drawing her eyebrows too high. She looked surprised.",
+    "What do you call a dog magician? A labracadabrador.",
+    "I started a company selling land mines disguised as prayer mats. Prophets are going through the roof.",
+    "I used to be a carpenter, but I couldn't make ends meet.",
+    "I told my wife she was drawing her eyebrows too high. She looked surprised.",
+    "What did the ocean say to the beach? Nothing, it just waved.",
+    "I had a joke about a bed, but it hasn’t been made yet.",
+    "I don’t trust people who do acupuncture. They’re back stabbers.",
+    "I told my wife she was drawing her eyebrows too high. She looked surprised.",
+    "I asked my wife if I was the only one she’s ever loved. She said yes, the others were all animals.",
+    "Why don’t skeletons fight each other? They don’t have the stomach for it.",
+    "What’s orange and sounds like a parrot? A carrot.",
+    "I’ve started investing in stocks: beef, chicken, and vegetable. One day I hope to be a bouillonaire.",
+    "Why don’t oysters share their pearls? Because they’re shellfish.",
+    "I bought a belt the other day for my pants, but it turned out it was a waste of time.",
+    "I’m writing a book about reverse psychology. Don’t buy it.",
+    "I’m on a whiskey diet. I’ve lost three days already.",
+    "I’d tell you a joke about an elevator, but it’s an uplifting experience.",
+    "I couldn’t figure out why I was late for work this morning. Then I realized I was parked in a no-parking zone.",
+    "I accidentally swallowed some food coloring. The doctor says I’m OK but I feel like I’ve dyed a little inside.",
+    "What’s a skeleton’s least favorite room in the house? The living room.",
+    "I accidentally used a dryer sheet as a napkin. It was too static-y.",
+    "I can’t believe I failed the math test. I guess I just don’t count.",
+    "I couldn’t remember how to throw a boomerang, but eventually it came back to me.",
+    "I told my friend 10 jokes to make him laugh. Sadly, no pun in ten did.",
+    "I’m terrified of speed bumps, but I’m slowly getting over it.",
+    "I used to play piano by ear, but now I use my hands.",
+    "Why don’t some couples go to the gym? Because some relationships don’t work out.",
+    "Did you hear about the mathematician who’s afraid of negative numbers? He’ll stop at nothing to avoid them.",
+    "What do you get when you cross a snowman with a vampire? Frostbite.",
+    "I used to be a baker, but I couldn’t make enough dough.",
+    "Why don’t oysters share their pearls? Because they’re shellfish.",
+    "I had a joke about a bed, but it hasn’t been made yet.",
+    "I have a fear of speed bumps, but I’m slowly getting over it.",
+    "What do you call fake spaghetti? An impasta.",
+    "What do you call a snowman with a six-pack? An abdominal snowman.",
+    "I started a company selling land mines disguised as prayer mats. Prophets are going through the roof.",
+    "I’ve started investing in stocks: beef, chicken, and vegetable. One day I hope to be a bouillonaire.",
+    "What did the ocean say to the beach? Nothing, it just waved.",
+    "I was wondering why the frisbee kept getting bigger, but then it hit me.",
+    "I was going to tell you a joke about an elevator, but it’s an uplifting experience.",
+    "What’s brown and sticky? A stick.",
+    "I told my wife she was drawing her eyebrows too high. She looked surprised.",
+    "I have a fear of speed bumps, but I’m slowly getting over it.",
+    "I’ve just written a song about tortillas. Actually, it’s more of a rap.",
+    "I tried to start a hot air balloon business, but it never took off.",
+    "Why don’t skeletons fight each other? They don’t have the stomach for it.",
+    "I started a company selling land mines disguised as prayer mats. Prophets are going through the roof.",
+    "I’ve started investing in stocks: beef, chicken, and vegetable. One day I hope to be a bouillonaire.",
+    "Why don’t oysters share their pearls? Because they’re shellfish."
+];
+
+btn.addEventListener("click",function(){
+    let randomLine = jokes[Math.floor(Math.random() * jokes.length)];
+
+let jok = document.querySelector("#jok");
+jok.textContent = randomLine;
+})
+
+</script>
+</body>
+</html>
